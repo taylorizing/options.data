@@ -1,3 +1,10 @@
+# title: "options.data.R"
+# author: "Jason Taylor"
+
+# todos:
+# - need to modify and run the earnings.open.R file to create the necessary .Rdata
+# files
+
 #' options.data: Processed option chain data from iVolatility.com
 #'
 #' options.data provides cleansed option chain data from iVolatility.com.  It's
