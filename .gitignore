@@ -8,3 +8,4 @@ data/IBM.options.RData
 data/SLV.options.RData
 data/SPY.options.RData
 data/XLE.options.RData
+*.Rproj
