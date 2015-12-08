@@ -1,3 +1,6 @@
+*.Rproj
+.Rproj.user
+.Rhistory
 data/AMZN.options.RData
 data/EEM.options.RData
 data/EWZ.options.RData
@@ -8,4 +11,3 @@ data/IBM.options.RData
 data/SLV.options.RData
 data/SPY.options.RData
 data/XLE.options.RData
-*.Rproj
