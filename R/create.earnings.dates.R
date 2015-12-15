@@ -15,10 +15,11 @@ AMZN.earnings.dates <- as.data.frame(matrix(c("2010-07-22", "2010-10-21",
                                               "2015-07-23", "2015-10-22")),
                                      stringsAsFactors = FALSE)
 names(AMZN.earnings.dates) <- "date"
-AMZN.earnings.dates <- dplyr::mutate(AMZN.earnings.dates,
+earnings.dates <- dplyr::mutate(AMZN.earnings.dates,
                               date = as.Date(date, origin = "1970-01-01"))
 
-save(AMZN.earnings.dates, file = "data/earnings.dates.AMZN.RData")
+save(earnings.dates, file = "data/earnings.dates.AMZN.RData")
+rm(earnings.dates)
 
 # GOOG earnings dates
 GOOG.earnings.dates <- as.data.frame(matrix(c("2010-07-15", "2010-10-14",
@@ -34,10 +35,11 @@ GOOG.earnings.dates <- as.data.frame(matrix(c("2010-07-15", "2010-10-14",
                                               "2015-07-16", "2015-10-22")),
                                      stringsAsFactors = FALSE)
 names(GOOG.earnings.dates) <- "date"
-GOOG.earnings.dates <- dplyr::mutate(GOOG.earnings.dates,
+earnings.dates <- dplyr::mutate(GOOG.earnings.dates,
                               date = as.Date(date, origin = "1970-01-01"))
 
-save(GOOG.earnings.dates, file = "data/earnings.dates.GOOG.RData")
+save(earnings.dates, file = "data/earnings.dates.GOOG.RData")
+rm(earnings.dates)
 
 # GS earnings dates
 GS.earnings.dates <- as.data.frame(matrix(c("2010-01-21", "2010-04-20",
@@ -55,10 +57,11 @@ GS.earnings.dates <- as.data.frame(matrix(c("2010-01-21", "2010-04-20",
                                             "2016-01-20")),
                                      stringsAsFactors = FALSE)
 names(GS.earnings.dates) <- "date"
-GS.earnings.dates <- dplyr::mutate(GS.earnings.dates,
+earnings.dates <- dplyr::mutate(GS.earnings.dates,
                               date = as.Date(date, origin = "1970-01-01"))
 
-save(GS.earnings.dates, file = "data/earnings.dates.GS.RData")
+save(earnings.dates, file = "data/earnings.dates.GS.RData")
+rm(earnings.dates)
 
 # IBM earnings dates
 IBM.earnings.dates <- as.data.frame(matrix(c("2010-01-19", "2010-04-19",
@@ -75,8 +78,9 @@ IBM.earnings.dates <- as.data.frame(matrix(c("2010-01-19", "2010-04-19",
                                              "2015-07-20", "2015-10-19")),
                                      stringsAsFactors = FALSE)
 names(IBM.earnings.dates) <- "date"
-IBM.earnings.dates <- dplyr::mutate(IBM.earnings.dates,
+earnings.dates <- dplyr::mutate(IBM.earnings.dates,
                               date = as.Date(date, origin = "1970-01-01"))
 
-save(IBM.earnings.dates, file = "data/earnings.dates.IBM.RData")
+save(earnings.dates, file = "data/earnings.dates.IBM.RData")
+rm(earnings.dates)
 
