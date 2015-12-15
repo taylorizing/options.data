@@ -1,6 +1,7 @@
 *.Rproj
 .Rproj.user
 .Rhistory
+.RData
 data/AMZN.options.RData
 data/EEM.options.RData
 data/EWZ.options.RData
