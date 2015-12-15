@@ -15,7 +15,7 @@ AMZN.earnings.dates <- as.data.frame(matrix(c("2010-07-22", "2010-10-21",
                                               "2015-07-23", "2015-10-22")),
                                      stringsAsFactors = FALSE)
 names(AMZN.earnings.dates) <- "date"
-AMZN.earnings.dates <- mutate(AMZN.earnings.dates,
+AMZN.earnings.dates <- dplyr::mutate(AMZN.earnings.dates,
                               date = as.Date(date, origin = "1970-01-01"))
 
 save(AMZN.earnings.dates, file = "data/earnings.dates.AMZN.RData")
@@ -34,7 +34,49 @@ GOOG.earnings.dates <- as.data.frame(matrix(c("2010-07-15", "2010-10-14",
                                               "2015-07-16", "2015-10-22")),
                                      stringsAsFactors = FALSE)
 names(GOOG.earnings.dates) <- "date"
-GOOG.earnings.dates <- mutate(GOOG.earnings.dates,
+GOOG.earnings.dates <- dplyr::mutate(GOOG.earnings.dates,
                               date = as.Date(date, origin = "1970-01-01"))
 
 save(GOOG.earnings.dates, file = "data/earnings.dates.GOOG.RData")
+
+# GS earnings dates
+GS.earnings.dates <- as.data.frame(matrix(c("2010-01-21", "2010-04-20",
+                                            "2010-07-20", "2010-10-19",
+                                            "2011-01-19", "2011-04-19",
+                                            "2011-07-19", "2011-10-18",
+                                            "2012-01-18", "2012-04-17",
+                                            "2012-07-17", "2012-10-16",
+                                            "2013-01-16", "2013-04-16",
+                                            "2013-07-16", "2013-10-17",
+                                            "2014-01-16", "2014-04-17",
+                                            "2014-07-15", "2014-10-16",
+                                            "2015-01-16", "2015-04-16",
+                                            "2015-07-16", "2015-10-15",
+                                            "2016-01-20")),
+                                     stringsAsFactors = FALSE)
+names(GS.earnings.dates) <- "date"
+GS.earnings.dates <- dplyr::mutate(GS.earnings.dates,
+                              date = as.Date(date, origin = "1970-01-01"))
+
+save(GS.earnings.dates, file = "data/earnings.dates.GS.RData")
+
+# IBM earnings dates
+IBM.earnings.dates <- as.data.frame(matrix(c("2010-01-19", "2010-04-19",
+                                             "2010-07-19", "2010-10-18",
+                                             "2011-01-18", "2011-04-19",
+                                             "2011-07-18", "2011-10-17",
+                                             "2012-01-19", "2012-04-17",
+                                             "2012-07-18", "2012-10-16",
+                                             "2013-01-22", "2013-04-18",
+                                             "2013-07-17", "2013-10-16",
+                                             "2014-01-21", "2014-04-16",
+                                             "2014-07-17", "2014-10-20",
+                                             "2015-01-20", "2015-04-20",
+                                             "2015-07-20", "2015-10-19")),
+                                     stringsAsFactors = FALSE)
+names(IBM.earnings.dates) <- "date"
+IBM.earnings.dates <- dplyr::mutate(IBM.earnings.dates,
+                              date = as.Date(date, origin = "1970-01-01"))
+
+save(IBM.earnings.dates, file = "data/earnings.dates.IBM.RData")
+
