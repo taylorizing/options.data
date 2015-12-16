@@ -3,10 +3,10 @@
 # **************    Raw data is not included in package.   *********************
 # **************       Instructions to get data below.     *********************
 
-package.build <- TRUE
-if(package.build == FALSE) {
+comment.for.build <- TRUE
+if (comment.for.build == FALSE) {
   
-Ensure environment includes libraries needed
+# Ensure environment includes libraries needed
 library(data.table)
 library(dplyr)
 library(TTR)
