@@ -116,7 +116,7 @@ combined.raw.data[,"dte"] <- as.integer(combined.raw.data$expiration - combined.
 
 # Calculate RSI 14 day for use in studies
 # Gather all the unique trading dates and include closing price to calculate study values
-unique.data <- unique(combined.raw.data, c(2, 3), incomparables = FALSE, fromLast = TRUE)
+unique.data <- unique(combined.raw.data, "date", incomparables = FALSE, fromLast = FALSE)
 
 # Add RSI study data to dataset
 unique.data[, "rsi.14"] <- RSI(unique.data$price, 14)
