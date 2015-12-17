@@ -13,6 +13,7 @@
 
 # Ensure environment includes libraries needed
 library(dplyr)
+library(lubridate)
 
 # Dates the market was closed and can'te be used in studies
 closed.dates <- c("2010-01-01", "2010-01-18","2010-02-15", "2010-04-02",
@@ -26,8 +27,8 @@ closed.dates <- c("2010-01-01", "2010-01-18","2010-02-15", "2010-04-02",
                   "2013-09-02", "2013-11-28", "2013-12-25", "2014-01-01",
                   "2014-01-20", "2014-02-17", "2014-04-18", "2014-05-26",
                   "2014-07-04", "2014-09-11", "2014-11-27", "2014-12-25",
-                  "2015-01-19", "2015-02-16", "2015-05-25", "2015-07-03",
-                  "2015-09-07", "2015-11-26")
+                  "2015-01-01", "2015-01-19", "2015-02-16", "2015-05-25",
+                  "2015-07-03", "2015-09-07", "2015-11-26")
 closed.dates <- as.Date(closed.dates)
 
 # Create first day of the month data file for use on trade entry
@@ -43,15 +44,14 @@ open.first.day.month <- dplyr::mutate(open.first.day.month,
                                  date = as.Date(mdy(paste0(mon, "-", day,
                                                            "-", year))))
 
+# Find day of week for each date
+open.first.day.month <- dplyr::mutate(open.first.day.month,
+                                      day.week = weekdays(open.first.day.month$date,
+                                                          abbreviate = FALSE))
 # Remove closed dates
 open.first.day.month <- dplyr::mutate(open.first.day.month,
                                       date = ifelse(date %in% closed.dates,
                                                     date + 1, date))
-
-# Find day of week for each date
-open.first.day.month <- dplyr::mutate(open.first.day.month,
-                                 day.week = weekdays(open.first.day.month$date,
-                                                     abbreviate = FALSE))
 # If date is Sat or Sun move to Monday
 open.first.day.month <- dplyr::mutate(open.first.day.month,
                                  date = ifelse(day.week == "Saturday",
@@ -67,6 +67,9 @@ open.first.day.month <- dplyr::mutate(open.first.day.month,
 open.first.day.month <- dplyr::mutate(open.first.day.month,
                                       date = ifelse(date %in% closed.dates,
                                                     date + 1, date))
+open.first.day.month <- dplyr::mutate(open.first.day.month,
+                                      date = as.Date(date, origin = "1970-01-01"))
+
 # Find day of week for each date
 open.first.day.month <- dplyr::mutate(open.first.day.month,
                                       day.week = weekdays(open.first.day.month$date,
