@@ -43,10 +43,10 @@ open.first.day.month <- dplyr::mutate(open.first.day.month,
                                  date = as.Date(mdy(paste0(mon, "-", day,
                                                            "-", year))))
 
-# If date is a market closed date move to next day
+# Remove closed dates
 open.first.day.month <- dplyr::mutate(open.first.day.month,
-                                 date = ifelse(date %in% closed.dates,
-                                               date + 1, date))
+                                      date = ifelse(date %in% closed.dates,
+                                                    date + 1, date))
 
 # Find day of week for each date
 open.first.day.month <- dplyr::mutate(open.first.day.month,
@@ -62,6 +62,25 @@ open.first.day.month <- dplyr::mutate(open.first.day.month,
 open.first.day.month <- dplyr::select(open.first.day.month, date)
 open.first.day.month <- dplyr::mutate(open.first.day.month,
                                  date = as.Date(date, origin = "1970-01-01"))
+
+# Remove closed dates second time for start of 2012
+open.first.day.month <- dplyr::mutate(open.first.day.month,
+                                      date = ifelse(date %in% closed.dates,
+                                                    date + 1, date))
+# Find day of week for each date
+open.first.day.month <- dplyr::mutate(open.first.day.month,
+                                      day.week = weekdays(open.first.day.month$date,
+                                                          abbreviate = FALSE))
+# If date is Sat or Sun move to Monday
+open.first.day.month <- dplyr::mutate(open.first.day.month,
+                                      date = ifelse(day.week == "Saturday",
+                                                    date + 2, date))
+open.first.day.month <- dplyr::mutate(open.first.day.month,
+                                      date = ifelse(day.week == "Sunday",
+                                                    date + 1, date))
+open.first.day.month <- dplyr::select(open.first.day.month, date)
+open.first.day.month <- dplyr::mutate(open.first.day.month,
+                                      date = as.Date(date, origin = "1970-01-01"))
 
 # Save data to be resused in options.data package
 save(open.first.day.month, file = "data/open.first.day.month.RData")
