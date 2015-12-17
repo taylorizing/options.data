@@ -42,25 +42,23 @@ data(vx.vix.daily.prices)
 # Change working directory to where the files are located so this script doesn't need to change
 # Comment out and adjust for the number of files you have
 # Read in the files to data.frames so they can be combined
-data0 <- fread("SPY-2010-Jan-Dec.csv")
-data1 <- fread("SPY-2011-Jan-June.csv")
-data2 <- fread("SPY-2011-July-Dec.csv")
-data3 <- fread("SPY-2012-Jan-June.csv")
-data4 <- fread("SPY-2012-July-Dec.csv")
-data5 <- fread("SPY-2013-Jan-June.csv")
-data6 <- fread("SPY-2013-July-Dec.csv")
-data7 <- fread("SPY-2014-Jan-Dec.csv")
-data8 <- fread("SPY-2015-Jan-Jul.csv")
-data9 <- fread("SPY-2015-Aug-Oct.csv")
+# This removes (exchange, style, and *)
+data0 <- fread("SPY-2010.csv", drop = c(2, 9, 16, 17))
+data1 <- fread("SPY-2011-1.csv", drop = c(2, 9, 16, 17))
+data2 <- fread("SPY-2011-2.csv", drop = c(2, 9, 16, 17))
+data3 <- fread("SPY-2012-1.csv", drop = c(2, 9, 16, 17))
+data4 <- fread("SPY-2012-2.csv", drop = c(2, 9, 16, 17))
+data5 <- fread("SPY-2013-1.csv", drop = c(2, 9, 16, 17))
+data6 <- fread("SPY-2013-2.csv", drop = c(2, 9, 16, 17))
+data7 <- fread("SPY-2014-1.csv", drop = c(2, 9, 16, 17))
+data8 <- fread("SPY-2014-2.csv", drop = c(2, 9, 16, 17))
+data9 <- fread("SPY-2015-1.csv", drop = c(2, 9, 16, 17))
+data10 <- fread("SPY-2015-2.csv", drop = c(2, 9, 16, 17))
 
 # Combine all the files into one data.frame
-combined.raw.data <- rbind(data0, data1, data2, data3, data4, data5, data6, data7, data8, data9)
+combined.raw.data <- rbind(data0, data1, data2, data3, data4, data5, data6, data7, data8, data9, data10)
 
 # ********************* END - Area of customization for different symbols*********************
-
-# Remove columns we don't need to save space and processing time in later scripts
-# This removes (exchange, style, and *)
-combined.raw.data <- subset(combined.raw.data, select = -c(2, 9, 16, 17))
 
 # Rename columns
 names(combined.raw.data) <- c("symbol", "date", "price", "option", "expiration",
