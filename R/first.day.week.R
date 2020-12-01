@@ -13,6 +13,7 @@
 
 # Ensure environment includes libraries needed
 library(dplyr)
+library(RcppBDT)
 
 # Dates the market was closed and can'te be used in studies
 closed.dates <- c("2010-01-01", "2010-01-18","2010-02-15", "2010-04-02",
@@ -74,8 +75,8 @@ open.first.day.week <- arrange(open.first.day.week, date)
 
 # If date is a market closed date move to next day
 open.first.day.week <- dplyr::mutate(open.first.day.week,
-                                 date = ifelse(date %in% closed.dates,
-                                               date + 1, date))
+                      date = case_when(date %in% closed.dates ~ date + lubridate::days(1),
+                                       TRUE ~ date))
 
 # Find day of week for each date
 open.first.day.week <- dplyr::mutate(open.first.day.week,
@@ -83,14 +84,14 @@ open.first.day.week <- dplyr::mutate(open.first.day.week,
                                                      abbreviate = FALSE))
 # If date is Sat or Sun move to Monday
 open.first.day.week <- dplyr::mutate(open.first.day.week,
-                                 date = ifelse(day.week == "Saturday",
-                                               date + 2, date))
+                                 date = case_when(day.week == "Saturday" ~
+                                               date + lubridate::days(2), TRUE ~  date))
 open.first.day.week <- dplyr::mutate(open.first.day.week,
-                                 date = ifelse(day.week == "Sunday",
-                                               date + 1, date))
+                                 date = case_when(day.week == "Sunday" ~
+                                               date + lubridate::days(1), TRUE ~ date))
 open.first.day.week <- dplyr::select(open.first.day.week, date)
-open.first.day.week <- dplyr::mutate(open.first.day.week,
-                                 date = as.Date(date, origin = "1970-01-01"))
+# open.first.day.week <- dplyr::mutate(open.first.day.week,
+#                                  date = as.Date(date, origin = "1970-01-01"))
 
 # Remove NA values
 open.first.day.week <- as.data.frame(open.first.day.week[complete.cases(open.first.day.week),])

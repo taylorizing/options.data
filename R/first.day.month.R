@@ -50,25 +50,21 @@ open.first.day.month <- dplyr::mutate(open.first.day.month,
                                                           abbreviate = FALSE))
 # Remove closed dates
 open.first.day.month <- dplyr::mutate(open.first.day.month,
-                                      date = ifelse(date %in% closed.dates,
-                                                    date + 1, date))
+                                      date = case_when(date %in% closed.dates ~
+                                                    date + lubridate::days(1), TRUE ~ date))
 # If date is Sat or Sun move to Monday
 open.first.day.month <- dplyr::mutate(open.first.day.month,
-                                 date = ifelse(day.week == "Saturday",
-                                               date + 2, date))
+                                 date = case_when(day.week == "Saturday" ~
+                                               date + lubridate::days(2), TRUE ~ date))
 open.first.day.month <- dplyr::mutate(open.first.day.month,
-                                 date = ifelse(day.week == "Sunday",
-                                               date + 1, date))
+                                 date = case_when(day.week == "Sunday" ~
+                                               date + lubridate::days(1), TRUE ~ date))
 open.first.day.month <- dplyr::select(open.first.day.month, date)
-open.first.day.month <- dplyr::mutate(open.first.day.month,
-                                 date = as.Date(date, origin = "1970-01-01"))
 
 # Remove closed dates second time for start of 2012
 open.first.day.month <- dplyr::mutate(open.first.day.month,
-                                      date = ifelse(date %in% closed.dates,
-                                                    date + 1, date))
-open.first.day.month <- dplyr::mutate(open.first.day.month,
-                                      date = as.Date(date, origin = "1970-01-01"))
+                                      date = case_when(date %in% closed.dates ~
+                                                         date + lubridate::days(1), TRUE ~ date))
 
 # Find day of week for each date
 open.first.day.month <- dplyr::mutate(open.first.day.month,
@@ -76,14 +72,12 @@ open.first.day.month <- dplyr::mutate(open.first.day.month,
                                                           abbreviate = FALSE))
 # If date is Sat or Sun move to Monday
 open.first.day.month <- dplyr::mutate(open.first.day.month,
-                                      date = ifelse(day.week == "Saturday",
-                                                    date + 2, date))
+                                      date = case_when(day.week == "Saturday" ~
+                                                         date + lubridate::days(2), TRUE ~ date))
 open.first.day.month <- dplyr::mutate(open.first.day.month,
-                                      date = ifelse(day.week == "Sunday",
-                                                    date + 1, date))
+                                      date = case_when(day.week == "Sunday" ~
+                                                         date + lubridate::days(1), TRUE ~ date))
 open.first.day.month <- dplyr::select(open.first.day.month, date)
-open.first.day.month <- dplyr::mutate(open.first.day.month,
-                                      date = as.Date(date, origin = "1970-01-01"))
 
 # Save data to be resused in options.data package
 save(open.first.day.month, file = "data/open.first.day.month.RData")
